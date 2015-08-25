@@ -81,7 +81,7 @@ void MainWindow::on_enc_btn_clicked()
         } else {
             QString title = "Encryption failed";
             QString message =  "An error occured";
-            QMessageBox::information(this, title, message);
+            QMessageBox::warning(this, title, message);
         }
 
         encPath = "";
@@ -121,7 +121,7 @@ void MainWindow::on_dec_btn_clicked()
         } else {
             QString title = "Decryption failed";
             QString message =  "Please verify you entered the corred password";
-            QMessageBox::information(this, title, message);
+            QMessageBox::warning(this, title, message);
 
             ui->dec_password->setText("");
         }
