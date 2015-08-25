@@ -7,3 +7,4 @@ In order to compile the source code, you will need Qmake and the following depen
 * QT5 Framework http://www.qt.io
 * Libarchive http://www.libarchive.org
 * Botan http://botan.randombit.net
+* Boost www.boost.org
