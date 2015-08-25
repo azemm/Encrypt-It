@@ -1,6 +1,6 @@
 #include "zipencrypt.h"
 
-ZipEncrypt::ZipEncrypt()
+ZipEncrypt::ZipEncrypt() : encryptedExtension(".ec")
 {
 
 }
@@ -12,7 +12,7 @@ bool ZipEncrypt::zipEncrypt(std::string dir, std::string password, bool delTemps
     bool zipSucess = Zip::zip(dir, dirPath.parent_path().string());
     if(zipSucess){
         std::string zippedDir = dir + ".zip";
-        std::string encryptedZippedDir = zippedDir + ".ec";
+        std::string encryptedZippedDir = zippedDir + encryptedExtension;
         result = encryption.encrypt(zippedDir, encryptedZippedDir, password);
 
         if(result && delTemps){
@@ -35,7 +35,7 @@ bool ZipEncrypt::zipDecrypt(std::string file, std::string password, bool delTemp
     bool result = false;
     boost::filesystem::path encryptedFile(file);
     if(boost::filesystem::exists(encryptedFile)){
-        std::string zippedDir = boost::algorithm::replace_last_copy(file, ".ec", "");
+        std::string zippedDir = boost::algorithm::replace_last_copy(file, encryptedExtension, "");
         bool success =  encryption.decrypt(file, zippedDir, password);
         boost::filesystem::path zipPath(zippedDir);
         if(success && boost::filesystem::exists(zipPath)){
@@ -55,5 +55,10 @@ bool ZipEncrypt::zipDecrypt(std::string file, std::string password, bool delTemp
     }
 
     return false;
+}
+
+void ZipEncrypt::setEncryptedExtension(std::string ext)
+{
+    this->encryptedExtension = ext;
 }
 

@@ -13,10 +13,11 @@ public:
     ZipEncrypt();
     bool zipEncrypt(std::string dir, std::string password, bool delTemps = false, bool original = false);
     bool zipDecrypt(std::string dir, std::string password, bool delTemps = false, bool original = false);
+    void setEncryptedExtension(std::string ext);
 
 private:
     AESEncryption encryption;
-
+    std::string encryptedExtension;
 };
 
 #endif // ZIPENCRYPT_H
